@@ -1,0 +1,7 @@
+terraform.tfvars
+.terraform/
+*.tfstate
+*.tfstate.backup
+
+build/
+*.tar.gz
