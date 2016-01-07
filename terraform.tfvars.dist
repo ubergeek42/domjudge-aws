@@ -1,0 +1,23 @@
+# Your AWS Credentials
+aws_access_key = "YOUR_ACCESS_KEY"
+aws_secret_key = "YOUR_AWS_SECRET_KEY"
+
+# What region to use
+aws_region = "us-east-1"
+
+# A list of availability zones in the region for your account
+# Needed to decide where to launch machines when autoscaling
+aws_availability_zones = "us-east-1a,us-east-1b,us-east-1d,us-east-1e"
+
+# The name of an AWS SSH Keypair you want your instances to use
+aws_ssh_keyname = "keypair-name"
+
+# An SNS Topic that will be notified when any alarms are triggered
+sns_topic_arn = "arn:aws:sns:region:000000000000:TopicName"
+
+# The AMI for your webservers and judgehosts. Follow the instructions in the
+# following repositories to create them if you haven't done so already
+# DOMServer - https://github.com/ubergeek42/domserver-ami
+# JudgeHost - https://github.com/ubergeek42/judgehost-ami
+web_ami = ""
+judge_ami = ""
