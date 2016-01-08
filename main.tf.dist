@@ -1,22 +1,3 @@
-variable "aws_access_key" {}
-variable "aws_secret_key" {}
-variable "aws_region" {}
-variable "aws_ssh_keyname" {}
-variable "aws_availability_zones" {}
-variable "sns_topic_arn" {}
-
-# The AMI for your webservers and judgehosts.
-# These are probably set in your terraform.tfvars file
-variable "web_ami" {}
-variable "judge_ami" {}
-
-# The ZoneID and Domain Name in Route53 that you want to use. A subdomain for
-# this cluster will be created.
-# If you don't want to use this, you need to delete/rename the
-# terraform-domserver/route53.tf file so it doesn't end with .tf
-variable "route53zone" { default = ""}
-variable "route53domain" { default = ""}
-
 # Change this to the id you want to refer to this domjudge cluster by
 # E.g. For the USA Southeast Region in 2015, we might use ser2015
 variable "djclusterid"          { default="uniqueid" }
@@ -27,7 +8,7 @@ variable "s3bucket"             { default="domserver-archives"}
 
 # Which archive in your S3 bucket do you want to deploy on your webservers?
 # This is the archive you built using prepare.sh
-variable "s3archive"            { default="domserver-YYY-MM-DD-HHMMSS.tar.gz"}
+variable "s3archive"            { default="domserver-YYYY-MM-DD-HHMMSS.tar.gz"}
 
 # What Instance Type do you want to use for Web Servers?
 variable "web_instance_type"    { default="t2.micro" }
@@ -35,7 +16,7 @@ variable "web_instance_type"    { default="t2.micro" }
 
 ########################## Database Settings ##################################
 # What Instance Type do you want to use for your mysql database server
-variable "rds_instance_type"    { default="t2.micro" }
+variable "rds_instance_type"    { default="db.t2.micro" }
 
 # Do you want your RDS Instance to run in multiple availability zones?
 # This gives you the ability to take snapshots without any downtime, and helps
@@ -58,7 +39,7 @@ variable "dynamodb_capacity"    { default=10 }
 
 ########################## JudgeHost Settings ##################################
 # What Instance Type do you want to use for Judge Hosts?
-variable "judge_instance_type"  { default="c4.xlarge" }
+variable "judge_instance_type"  { default="t2.micro" }
 
 # What is the base URL for your domjudge server
 variable "web_base_address"     { default="http://domjudge.example.com" }
@@ -75,11 +56,26 @@ variable "max_judgehosts"       { default=4 }
 ################################################################################
 ### Don't Touch Below This Line!                                             ###
 ################################################################################
+
+# These should all be set in your terraform.tfvars file
+variable "aws_access_key" {}
+variable "aws_secret_key" {}
+variable "aws_region" {}
+variable "aws_ssh_keyname" {}
+variable "aws_availability_zones" {}
+variable "sns_topic_arn" {}
+variable "web_ami" {}
+variable "judge_ami" {}
+variable "use_route53"    {}
+variable "route53zone"    {}
+variable "route53domain"  {}
+
 module "terraform-domserver" {
   s3region = "${var.aws_region}"
   s3bucket = "${var.s3bucket}"
-  s3archive = "${var.s3bucket}"
+  s3archive = "${var.s3archive}"
 
+  use_route53 = "${var.use_route53}"
   route53zone = "${var.route53zone}"
   route53domain = "${var.route53domain}"
 
