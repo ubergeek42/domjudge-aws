@@ -7,6 +7,9 @@ aws_region = "us-east-1"
 
 # A list of availability zones in the region for your account
 # Needed to decide where to launch machines when autoscaling
+# You can find the list of availability zones for your region on your
+# EC2 Dashboard near the bottom of the page under Service Health.
+# https://console.aws.amazon.com/ec2/v2/home
 aws_availability_zones = "us-east-1a,us-east-1b,us-east-1d,us-east-1e"
 
 # The name of an AWS SSH Keypair you want your instances to use
