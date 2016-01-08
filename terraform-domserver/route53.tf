@@ -1,7 +1,9 @@
+variable "use_route53" {}
 variable "route53zone" {}
 variable "route53domain" {}
-  
+
 resource "aws_route53_record" "www" {
+  count = "${var.use_route53}"
   zone_id = "${var.route53zone}"
   name = "${var.djclusterid}.${var.route53domain}"
   type = "A"

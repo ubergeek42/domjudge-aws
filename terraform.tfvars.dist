@@ -21,3 +21,9 @@ sns_topic_arn = "arn:aws:sns:region:000000000000:TopicName"
 # JudgeHost - https://github.com/ubergeek42/judgehost-ami
 web_ami = ""
 judge_ami = ""
+
+# If you want to create a custom subdomain for this cluster enter your
+# route53 details here
+use_route53 = 0       # set to 0 to disable, 1 to enable
+route53zone = ""      # The Route53 Zone ID(e.g. Z00ABCDEFGHIJKL)
+route53domain = ""    # The actual domain name(e.g. example.com)
